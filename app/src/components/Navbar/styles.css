@@ -1,0 +1,10 @@
+.navbar{
+    background-color: #337ab7!important;
+    border-color: #337ab7!important;
+    color: #ffffff!important;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    float: left;
+}

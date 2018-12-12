@@ -1,24 +1,50 @@
-/*
- * Every class name will be hashed so it can be used their own component scoped
- * Use classes instead of ids
- */
-
-._1WcHgGtKrxqKCsGYj62eVK {
-    height: 100px;
+._2ECTmzMk96vxJDZdbByM5Z{
+    background-color: #337ab7!important;
+    border-color: #337ab7!important;
+    color: #ffffff!important;
+    display: flex;
+    align-items: center;
 }
-/*
- * Every class name will be hashed so it can be used their own component scoped
- * Use classes instead of ids
- */
-
-.sFVP9dDAE84wfL1CUC_NG {
-    color: var(--primary-color);    /* Using global constants example */
+.NQAl2Jwouk5utCKoCLyM6{
+    float: left;
+}/*itenm{
+    composes: action,
+    .item.active {
+        background-color: #2c3e50!important;
+        border-color: #2c3e50!important;
+        
+    }
 }
-
-._1FRk9e-PmvCebL7xwPN-Hf {                 /* Composition example */
-    text-decoration: none;
+.action{
+    composes: item from './buttonStyle.css';
 }
-/*
+.item {
+     item.active;
+}
+*/
+._31s-wbtViPIPrXyKDVZO8s._3ptBUeSvOgmRuOeuvcHdgS, ._31s-wbtViPIPrXyKDVZO8s._3ptBUeSvOgmRuOeuvcHdgS:hover,._31s-wbtViPIPrXyKDVZO8s._3ptBUeSvOgmRuOeuvcHdgS:focus {
+    z-index: 2;
+    color:#ffffff!important;
+    background-color: #2c3e50!important;
+    border-color: #2c3e50!important;
+    
+}
+.packL2_FhOb-TVyJFT5Fh {     
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 15%;
+}
+._3y6kyqqlaflaYLFddgr5mo {    
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}._34bK7qgPMwJCUmvnwHI8ex{
+    width: 79%;
+
+}/*
  * Global constants goes here
  */
 :root {
@@ -31,17 +57,19 @@
  */
 html {
     height: 100%;
+    text-align: center;
 }
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100%;
     margin: auto;
+    text-align: center;
 }
+
 #app {
     color: #2c3e50;
-    max-width: 600px;
+    width: 100%;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: center;
 }
@@ -50,4 +78,10 @@ body {
 }
 .hello {
     color: var(--primary-color);
+}
+.contentBody{
+    width: 100%;
+    padding: 0 auto;
+    height: 90%;
+    display: flex;
 }

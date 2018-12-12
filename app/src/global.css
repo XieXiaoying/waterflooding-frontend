@@ -11,17 +11,19 @@
  */
 :global html {
     height: 100%;
+    text-align: center;
 }
 :global body {
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100%;
     margin: auto;
+    text-align: center;
 }
+
 :global #app {
     color: #2c3e50;
-    max-width: 600px;
+    width: 100%;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: center;
 }
@@ -30,4 +32,10 @@
 }
 :global .hello {
     color: var(--primary-color);
+}
+:global .contentBody{
+    width: 100%;
+    padding: 0 auto;
+    height: 90%;
+    display: flex;
 }
