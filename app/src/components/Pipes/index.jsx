@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {data} from './data.js';
+import PointDetail from './../PointDetail';
+import { connect } from 'react-redux';
+import {setCurPoint, asyncLoadPicsOfPoi} from './../../actions/pipeActions';
 class ImageList extends Component {
     constructor(props) {
         super(props);
@@ -19,33 +22,60 @@ class ImageList extends Component {
 function calDistance(aimX, aimY, picX, picY){
     return Math.sqrt(Math.sqrt((aimX-picX)*(aimX-picX) + (aimY-picY)*(aimY-picY)));
 }
-export default class Pipes extends Component {
+class Pipes extends Component {
     constructor(props){
         super(props);
         this.state = {
             routeHeight: window.innerHeight * 0.9,
             routeWidth: window.innerWidth * 0.79,
+            show: false,
             xBase: 48920,
-            yBase: 34126
+            yBase: 34126,
+            currentPoint: '',
+            screenX: 0,
+            screenY:0
         };
     }
+    showDetail(name, x, y){
+        this.props.dispatch(setCurPoint(name, x, y));
+        this.props.dispatch(asyncLoadPicsOfPoi());
+    }
     imgClick(evt){
+        this.setState({
+            screenX: evt.screenX,
+            screenY: evt.screenY
+        });
         let minVal = {
             value: 10000000,
-            tag: ''
+            tag: '',
+            x: 0,
+            y: 0
         }
-        const x = (evt.screenX - 0.21*window.innerWidth-20);
-        const y = evt.screenY-20-window.innerHeight*0.1;
         Object.keys(data.imageSrc).map((item)=>{
+            const x = evt.screenX - 0.21*window.innerWidth-20;
+            const y = evt.screenY-20-window.innerHeight*0.1;
             const itemX = data.imageSrc[item].x / this.state.xBase * this.state.routeWidth-20;
             const itemY = data.imageSrc[item].y / this.state.yBase * this.state.routeHeight-20;
             const distance = calDistance(itemX, itemY, x, y);
             if(distance< minVal.value){
                 minVal.value = distance;
                 minVal.tag = item;
+                minVal.x = itemX;
+                minVal.y = itemY;
             }
         });
-        console.log(minVal.tag);
+        this.showDetail(minVal.tag, minVal.x, minVal.y);
+        if(minVal.value > 8) {
+            this.setState({
+                show: false
+                
+            });
+        } else {
+            this.setState({
+                currentPoint: minVal.tag,
+                show: true
+            });
+        }
     }
     componentDidMount() {
         this.drawPipeRoute();
@@ -81,8 +111,16 @@ export default class Pipes extends Component {
             <div>
                 <canvas ref="canvas" onClick={this.imgClick.bind(this)} height={this.state.routeHeight} width={this.state.routeWidth}></canvas>
                 <ImageList ref="img"/>
+                {this.state.show ? <PointDetail screenX = {this.state.screenX} screenY = {this.state.screenY} id={this.state.currentPoint}/> : null}
             </div>
             
         );
     }
 }
+function mapStateToProps(state) {
+    return {
+        status: state.status,
+        pressurationPoint: state.pressurationPoint
+    };
+}
+export default connect(mapStateToProps)(Pipes);
